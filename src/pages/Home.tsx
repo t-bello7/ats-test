@@ -1,7 +1,7 @@
 import Typography from '@mui/material/Typography';
 
 const Home = () => {
-    return(<Typography> Home page </Typography>)
+    return(<Typography paragraph> Hello Home </Typography>)
 }
 
 export default Home;

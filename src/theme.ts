@@ -4,7 +4,7 @@ import Poppins from './assets/fonts/Poppins-Regular.ttf';
 const theme = createTheme({
   palette: {
     error: {
-        main: 'hsla(0, 100%, 33%, 1)'
+      main: 'hsla(0, 100%, 33%, 1)'
     },
     primary: {
       main: 'hsla(175, 100%, 19%, 1)',
