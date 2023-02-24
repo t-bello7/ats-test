@@ -2,25 +2,37 @@ import { Box } from "@mui/system";
 import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined';
 
 type formProps = {
-    question: string
+    question: string,
 }
 
-export const UploadImage = (props: formProps) => {
-    const { question } = props
+type uploadProps = {
+    question: string,
+    name: string,
+    handleChange: (e:  React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => void
+}
+export const UploadImage = (props: uploadProps) => {
+    const { question,
+            handleChange,
+        } = props
     return (
     <Box> 
-    <FileUploadOutlinedIcon />
-    {question}
-    <input type="file"/>    
+        <FileUploadOutlinedIcon />
+        {question}
+        <input type="file" onChange={handleChange}/>    
     </Box>
 )};
 
-export const ShortAnswer = (props: formProps)  => {
-    const { question } = props
+export const ShortAnswer = (props: uploadProps)  => {
+    const { question,
+            handleChange,
+            name } = props
     return(
     <Box> 
         {question} 
-        <input type="question"/>    
+            
+        <input type="question"
+            name={name}
+            onChange={handleChange} />    
     </Box>
 )};
 
