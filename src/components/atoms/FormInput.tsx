@@ -1,3 +1,4 @@
+import { useEffect, useState, ChangeEvent, Dispatch } from "react";
 import { Box } from "@mui/system";
 import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined';
 
@@ -8,31 +9,65 @@ type formProps = {
 type uploadProps = {
     question: string,
     name: string,
-    handleChange: (e:  React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => void
+    defaultValue?: string
+    // onNewValue: (name: string, e:  React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => void,
+    onNewValue?: (args: { name: string; value: string | number }) => void;
 }
+
 export const UploadImage = (props: uploadProps) => {
     const { question,
-            handleChange,
+            name,
+            onNewValue,
         } = props
+
+    const [value, setValue] = useState("") as [
+        string,
+        Dispatch<React.SetStateAction<string>>
+        ];
+    
+    useEffect(() => {
+        if (onNewValue) onNewValue({ name, value });
+    }, [value]);
+    
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setValue(e.target.value);
+    };
+    
     return (
     <Box> 
         <FileUploadOutlinedIcon />
         {question}
-        <input type="file" onChange={handleChange}/>    
+        <input name={name} type="file" value={value} onChange={handleChange}/>    
     </Box>
 )};
 
 export const ShortAnswer = (props: uploadProps)  => {
     const { question,
-            handleChange,
+            onNewValue,
             name } = props
+
+    const [value, setValue] = useState("") as [
+        string,
+        Dispatch<React.SetStateAction<string>>
+    ];
+    
+    useEffect(() => {
+        if (onNewValue) onNewValue({ name, value });
+    }, [value]);
+    
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setValue(e.target.value);
+    };
+
     return(
     <Box> 
         {question} 
-            
-        <input type="question"
+        <input
+            type="text"
             name={name}
-            onChange={handleChange} />    
+            value={value}
+            onChange={handleChange}
+        />    
     </Box>
 )};
 
